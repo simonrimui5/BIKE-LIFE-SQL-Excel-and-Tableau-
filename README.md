@@ -1,5 +1,5 @@
 # BIKE-LIFE-SQL-Excel-and-Tableau-
-![Uploading project image.jpg…]()
+![project image](https://github.com/user-attachments/assets/6dd0db14-e4ae-44bb-95c2-e64f8deb4be7)
 
 ## Table of Contents
 
