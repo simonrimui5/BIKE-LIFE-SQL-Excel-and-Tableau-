@@ -29,9 +29,43 @@ In this project I combined SQL, Excel and Tableau. Bike Life's (a retail bicycle
 
 I tapped into the company’s relational database and retrieved the data through sql by writing an sql code to generate a detailed dataset that provided me with all the data and information I needed to put together a dynamic sales dashboard for the executive team.
 
-*IN 1*
-
-![sql query](https://github.com/simonrimui5/BIKE-LIFE-SQL-Excel-and-Tableau-/assets/155226875/207c5afa-f6e2-424d-9116-b55aff197c52)
+```sql
+SELECT 
+	ord.order_id,
+	CONCAT(cus.first_name,' ',cus.last_name) AS 'customers',
+	cus.city,
+	cus.state,
+	ord.order_date,
+    SUM(ite.quantity) AS 'total_units',
+	SUM(ite.quantity * ite.list_price) AS 'revenue',
+	pro.product_name,
+	cat.category_name,
+	sto.store_name,
+	CONCAT(sta.first_name,' ',sta.last_name) AS 'sales_rep'
+FROM sales.orders ord
+JOIN sales.customers cus
+ON ord.customer_id=cus.customer_id
+JOIN sales.order_items ite
+ON ord.order_id=ite.order_id
+JOIN production.products pro
+ON ite.product_id=pro.product_id
+JOIN production.categories cat
+ON pro.category_id =cat.category_id
+JOIN sales.stores sto
+ON ord.store_id = sto.store_id
+JOIN sales.staffs sta
+ON ord.staff_id = sta.staff_id
+GROUP BY
+	ord.order_id,
+	CONCAT(cus.first_name,' ', cus.last_name),
+	cus.city,
+	cus.state,
+	ord.order_date,
+	pro.product_name,
+	cat.category_name,
+	sto.store_name,
+	CONCAT(sta.first_name,' ',sta.last_name);
+```
 
 *OUT 1*
 
